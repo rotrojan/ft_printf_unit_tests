@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 04:21:09 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/12 06:12:36 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/13 07:01:46 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,72 +16,120 @@
 #include <stdio.h>
 #include <time.h>
 #include "../rendu/ft_printf00/include/ft_printf.h"
-#define DECLARATIONS			\
-	int		ret_printf;			\
-	int		ret_ft_printf;		\
-	char	format[512];		\
-	char	*str_printf;
+#define MIN_CHAR 1
+#define MAX_CHAR 127
+#define RAND (rand() % (MAX_CHAR - MIN_CHAR + 1)) + MIN_CHAR
+#define GIANT_BUFF	6384
+#define FMT_BUFF	512
 
-TestSuite(percent_c);
-
-void	test_one_char(char *str)
+void	init_seed_and_stdout(void)
 {
-	DECLARATIONS
-	char	c;
+	srand(time(NULL));
+	cr_redirect_stdout();
+}
 
-	strcpy(format, str);
-	ret_printf = asprintf(&str_printf, format, c);
-	ret_ft_printf = ft_printf(format, c);
+TestSuite(one_char, .init = init_seed_and_stdout);
+
+Test(one_char, test00)
+{
+	char	*str;
+	char	*format = "le char %c est un arobase";
+	char	c = RAND;
+
+	cr_expect_eq(asprintf(&str, format, c), ft_printf(format, c),
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong value.", format, c);
 	fflush(stdout);
-	cr_assert_stdout_eq_str(str_printf,
-		"The output of your printf is wrong.");
-	cr_assert(ret_ft_printf == ret_ft_printf,
-		"Your printf does not return a good value.");
-	free(str_printf);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong output.", format, c);
+	free(str);
 }
 
-Test(percent_c, test00, .init = cr_redirect_stdout)
+Test(one_char, test01)
 {
-	test_one_char("le char %-14c est (ou pas) un arobase");
-}
+	char	*str;
+	char	*format = "le char %14c est un arobase";
+	char	c = RAND;
 
-Test(percent_c, test01, .init = cr_redirect_stdout)
-{
-	test_one_char("le char %043c est (ou pas) un arobase");
-}
-
-Test(percent_c, test02, .init = cr_redirect_stdout)
-{
-	test_one_char("le char %14-0c est (ou pas) un arobase");
-}
-
-Test(percent_c, test03, .init = cr_redirect_stdout)
-{
-	test_one_char("le char %06.12c est (ou pas) un arobase");
-}
-
-TestSuite(percent_c_with_asterisk);
-
-void	test_one_char_with_one_asterisk(char *str)
-{
-	DECLARATIONS
-	char	c;
-	int		ast;
-
-	c = (rand() % (127 - 0 + 1)) + 0;
-	ast = (rand() % (1000 - 0 + 1)) + 0;
-	strcpy(format, str);
-	ret_printf = asprintf(&str_printf, format, ast, c);
-	ret_ft_printf = ft_printf(format, ast, c);
+	cr_expect_eq(asprintf(&str, format, c), ft_printf(format, c),
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong value.", format, c);
 	fflush(stdout);
-	cr_assert_stdout_eq_str(str_printf,
-		"The output of your printf is wrong.");
-	cr_assert(ret_ft_printf == ret_ft_printf,
-		"Your printf does not return a good value.");
-	free(str_printf);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong output.", format, c);
+	free(str);
 }
 
-Test(test_one_char_with_one_asterisk, test00)
+Test(one_char, test02)
 {
+	char	*str;
+	char	*format = "le char %-23c est un arobase";
+	char	c = RAND;
 
+	cr_expect_eq(asprintf(&str, format, c), ft_printf(format, c),
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong value.", format, c);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong output.", format, c);
+	free(str);
+}
+
+Test(one_char, test03)
+{
+	char	*str;
+	char	*format = "le char %027c est un arobase";
+	char	c = RAND;
+
+	cr_expect_eq(asprintf(&str, format, c), ft_printf(format, c),
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong value.", format, c);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong output.", format, c);
+	free(str);
+}
+
+Test(one_char, test04)
+{
+	char	*str;
+	char	*format = "le char %052-c est un arobase";
+	char	c = RAND;
+
+	cr_expect_eq(asprintf(&str, format, c), ft_printf(format, c),
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong value.", format, c);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong output.", format, c);
+	free(str);
+}
+
+Test(one_char, test05)
+{
+	char	*str;
+	char	*format = "le char %05000c est un arobase";
+	char	c = RAND;
+
+	cr_expect_eq(asprintf(&str, format, c), ft_printf(format, c),
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong value.", format, c);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong output.", format, c);
+	free(str);
+}
+
+TestSuite(backslash_zero, .init = init_seed_and_stdout);
+
+Test(backslash_zero, test00)
+{
+	char	str_pf[GIANT_BUFF];
+	char	str_ft[GIANT_BUFF];
+	char	format[FMT_BUFF];
+	char	c = '\0';
+
+	bzero(str_ft, sizeof(str_ft));
+	bzero(str_pf, sizeof(str_pf));
+	strcpy((char*)format, "test du %c aka \\0");
+	cr_expect_eq(sprintf(str_pf, format, c), ft_printf(format, c),
+		"ft_printf(\"%s\", char c = \'\\0\') return a wrong value.", format);
+	freopen("/dev/null", "a", stdout);
+	setbuf(stdout, str_ft);
+	cr_expect_arr_eq(str_pf, str_ft, GIANT_BUFF,
+		"ft_printf(\"%s\", char c = \'\\0\') return a wrong output.", format);
 }
