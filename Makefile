@@ -6,7 +6,7 @@
 #    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 07:02:44 by rotrojan          #+#    #+#              #
-#    Updated: 2019/12/13 08:04:29 by rotrojan         ###   ########.fr        #
+#    Updated: 2019/12/14 05:21:13 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,16 @@ INC_FT_PRINTF		=		-L ${FT_PRINTF_DIR} -lftprintf
 
 CC					=		clang
 CFLAGS				=		-Wall -Wextra -Werror
+MAKE				=		make
+NORMINETTE			=		norminette
 
 RM					=		rm -f
 
 all					:		${NAME}
 
 ${NAME}				:		${OBJS}
+	${NORMINETTE} ${FT_PRINTF_DIR}
+	${MAKE} -C ${FT_PRINTF_DIR}
 	${CC} ${CFLAGS} $< -o $@ ${INC_FT_PRINTF} ${INC_CRITERION}
 
 %.o					:		%.c
@@ -36,9 +40,11 @@ tests				:
 	./${NAME}
 
 clean				:
+	${MAKE} clean -C ${FT_PRINTF_DIR}
 	${RM} ${OBJS}
 
 fclean				:		clean
+	${MAKE} fclean -C ${FT_PRINTF_DIR}
 	${RM} ${NAME}
 
 re					:		fclean all
