@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 04:21:09 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/14 06:21:33 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/14 21:28:29 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ Test(one_char, test05)
 	free(str);
 }
 
-TestSuite(backslash_zero/*, .init = init_seed_and_stdout*/);
+TestSuite(backslash_zero);
 
 int		test_backslash_zero	(char *format, char **pf_buf, char **ft_buf, int *ret_pf)
 {
@@ -236,6 +236,7 @@ Test(backslash_zero, test08)
 	char	*format = "le char %-05000.76c est un \\0";
 
 	ret_ft = test_backslash_zero(format, &pf_buf, &ft_buf, &ret_pf);
+	ft_buf[12] = 'Y';
 	cr_expect_eq(ret_pf, ret_ft,"ft_printf(\"%s\", char c = \'\\0\') return a wrong value.", format);
 	cr_expect_arr_eq(pf_buf, ft_buf, ret_pf, "ft_printf(\"%s\", char c = \'\\0\') return a wrong output.", format);
 	free(pf_buf);
@@ -254,3 +255,20 @@ Test(backslash_zero, test09)
 	free(pf_buf);
 	free(ft_buf);
 }
+/*
+TestSuite(one_asterik);
+
+Test(one_asterik, test00)
+{
+	char	*str;
+	char	*format = "le char %c est un arobase";
+	char	c = RAND;
+
+	cr_expect_eq(asprintf(&str, format, c), ft_printf(format, c),
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong value.", format, c);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", char c = \'%c\') return a wrong output.", format, c);
+	free(str);
+}
+*/

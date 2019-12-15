@@ -6,7 +6,7 @@
 #    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 07:02:44 by rotrojan          #+#    #+#              #
-#    Updated: 2019/12/14 05:21:13 by rotrojan         ###   ########.fr        #
+#    Updated: 2019/12/15 08:52:43 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,14 +29,14 @@ RM					=		rm -f
 all					:		${NAME}
 
 ${NAME}				:		${OBJS}
-	${NORMINETTE} ${FT_PRINTF_DIR}
 	${MAKE} -C ${FT_PRINTF_DIR}
 	${CC} ${CFLAGS} $< -o $@ ${INC_FT_PRINTF} ${INC_CRITERION}
 
 %.o					:		%.c
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-tests				:
+test				:
+	${NORMINETTE} ${FT_PRINTF_DIR}
 	./${NAME}
 
 clean				:
@@ -49,4 +49,4 @@ fclean				:		clean
 
 re					:		fclean all
 
-.PHONY : all tests clean fclean re
+.PHONY : all test clean fclean re
