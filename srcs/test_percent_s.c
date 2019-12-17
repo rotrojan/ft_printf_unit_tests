@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 10:33:19 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/16 14:52:49 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/18 00:25:52 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -491,5 +491,161 @@ Test(two_str, test06)
 	fflush(stdout);
 	cr_expect_stdout_eq_str(str,
 		"ft_printf(\"%s\", char s1 = \'%s\', char s2 = \'%s\') return a wrong output.", format, s1, s2);
+	free(str);
+}
+
+TestSuite(null_str, .init = init_seed_and_stdout);
+
+Test(null_str, test00)
+{
+	char	*str;
+	char	*format = "la string str : %s ...";
+	char	*s = NULL;
+
+	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
+		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
+	free(str);
+}
+
+Test(null_str, test01)
+{
+	char	*str;
+	char	*format = "la string str : %14s ...";
+	char	*s = NULL;
+
+	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
+		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
+	free(str);
+}
+
+Test(null_str, test02)
+{
+	char	*str;
+	char	*format = "la string str : %-23s ...";
+	char	*s = NULL;
+
+	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
+		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
+	free(str);
+}
+
+Test(null_str, test03)
+{
+	char	*str;
+	char	*format = "la string str : %027s ...";
+	char	*s = NULL;
+
+	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
+		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
+	free(str);
+}
+
+Test(null_str, test04)
+{
+	char	*str;
+	char	*format = "la string str : %052-s ...";
+	char	*s = NULL;
+
+	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
+		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
+	free(str);
+}
+
+Test(null_str, test05)
+{
+	char	*str;
+	char	*format = "la string str : %05000s ...";
+	char	*s = NULL;
+
+	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
+		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
+	free(str);
+}
+
+Test(null_str, test06)
+{
+	char	*str;
+	char	*format = "la string str : %05000.s ...";
+	char	*s = NULL;
+
+	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
+		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
+	free(str);
+}
+
+Test(null_str, test07)
+{
+	char	*str;
+	char	*format = "la string str : %0-.s ...";
+	char	*s = NULL;
+
+	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
+		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
+	free(str);
+}
+
+Test(null_str, test08)
+{
+	char	*str;
+	char	*format = "la string str : %.3s ...";
+	char	*s = NULL;
+
+	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
+		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
+	free(str);
+}
+
+Test(null_str, test09)
+{
+	char	*str;
+	char	*format = "la string str : %.0s ...";
+	char	*s = NULL;
+
+	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
+		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
+	free(str);
+}
+
+Test(null_str, test10)
+{
+	char	*str;
+	char	*format = "la string str : %.5000s ...";
+	char	*s = NULL;
+
+	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
+		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
+	fflush(stdout);
+	cr_expect_stdout_eq_str(str,
+		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
 	free(str);
 }
