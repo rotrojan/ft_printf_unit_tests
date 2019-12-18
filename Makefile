@@ -6,13 +6,13 @@
 #    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 07:02:44 by rotrojan          #+#    #+#              #
-#    Updated: 2019/12/16 14:52:11 by rotrojan         ###   ########.fr        #
+#    Updated: 2019/12/18 11:30:15 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FT_PRINTF_DIR		=		../rendu/ft_printf00/
 
-_SRCS				=		test_percent_s.c test_percent_c.c
+_SRCS				=		test_percent_s.c test_percent_c.c test_percent_d.c
 SRCS_DIR			=		./srcs/
 SRCS				=		$(addprefix ${SRCS_DIR}, ${_SRCS})
 OBJS				=		${SRCS:.c=.o}
