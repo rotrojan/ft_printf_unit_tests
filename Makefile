@@ -6,7 +6,7 @@
 #    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 07:02:44 by rotrojan          #+#    #+#              #
-#    Updated: 2019/12/18 11:30:15 by rotrojan         ###   ########.fr        #
+#    Updated: 2019/12/19 09:17:44 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ RM					=		rm -f
 all					:		${NAME}
 
 ${NAME}				:		${OBJS} | build
-	@echo yolo
 	${CC} ${CFLAGS} ${INC_FT_PRINTF} ${INC_CRITERION} $^ -o $@
 
 %.o					:		%.c
