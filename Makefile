@@ -6,7 +6,7 @@
 #    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 07:02:44 by rotrojan          #+#    #+#              #
-#    Updated: 2019/12/19 09:17:44 by rotrojan         ###   ########.fr        #
+#    Updated: 2019/12/22 16:05:22 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ ${NAME}				:		${OBJS} | build
 build				:
 	@${MAKE} -C ${FT_PRINTF_DIR}
 
-test				:	${NAME} build
+test				:	re
 	./${NAME}
 
 details				: ${NAME} build
