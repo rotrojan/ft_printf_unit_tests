@@ -12,23 +12,24 @@
 
 #ifndef TEST_FT_PRINTF_H
 # define TEST_FT_PRINTF_H
-#include <criterion/criterion.h>
-#include <criterion/redirect.h>
-#include <string.h>
-#include <stdio.h>
-#include <time.h>
-#include <fcntl.h>
-#include "../rendu/ft_printf00/include/ft_printf.h"
-#define MIN_CHAR 1
-#define MAX_CHAR 127
-#define RAND_INT (rand() % (MAX_INT - MIN_INT + 1)) + MIN_INT
-#define RAND_POS_INT (rand() % (2147483647 - 1 + 1)) + 1
-#define RAND_NEG_INT (rand() % (-1 - -2147483648 + 1)) + -2147483648
-#define MIN_INT -2147483648
-#define MAX_INT 2147483647
-#define RAND_CHAR (rand() % (MAX_CHAR - MIN_CHAR + 1)) + MIN_CHAR
-#define GIANT_BUFF	6384
-#define FMT_BUFF	512
+# include <criterion/criterion.h>
+# include <criterion/redirect.h>
+# include <criterion/theories.h>
+# include <string.h>
+# include <stdio.h>
+# include <time.h>
+# include <fcntl.h>
+# include "ft_printf.h"
+# define MIN_CHAR 1
+# define MAX_CHAR 127
+# define MIN_INT -2147483648
+# define MAX_INT 2147483647
+# define RAND_INT (rand() % (MAX_INT - MIN_INT + 1)) + MIN_INT
+# define RAND_POS_INT (rand() % (MAX_INT - 1 + 1)) + 1
+# define RAND_NEG_INT (rand() % (-1 - MIN_INT + 1)) + MIN_INT
+# define RAND_CHAR (rand() % (MAX_CHAR - MIN_CHAR + 1)) + MIN_CHAR
+# define GIANT_BUFF	6384
+# define FMT_BUFF	512
 
 void	init_seed_and_stdout(void);
 

@@ -11,641 +11,114 @@
 /* ************************************************************************** */
 
 #include "test_ft_printf.h"
+#define STR_DATAPOINTS DataPoints(char*,	\
+	"chaine non vide et non nulle",			\
+	"",										\
+	NULL)
+#define FORMAT_DATAPOINTS DataPoints(char*,	\
+	"la string\"%s\" est affiche.",			\
+											\
+	"la string\"%42s\" est affiche.",			\
+	"la string\"%1s\" est affiche.",			\
+	"la string\"%10000s\" est affiche.",		\
+											\
+	"la string\"%0s\" est affiche.",			\
+	"la string\"%042s\" est affiche.",			\
+	"la string\"%01s\" est affiche.",			\
+	"la string\"%010000s\" est affiche.",		\
+											\
+	"la string\"%-s\" est affiche.",			\
+	"la string\"%-42s\" est affiche.",			\
+	"la string\"%-1s\" est affiche.",			\
+	"la string\"%-10000s\" est affiche.",		\
+											\
+	"la string\"%-0s\" est affiche.",			\
+	"la string\"%-042s\" est affiche.",		\
+	"la string\"%-01s\" est affiche.",			\
+	"la string\"%-010000s\" est affiche.",		\
+											\
+	"la string\"%0-s\" est affiche.",			\
+	"la string\"%0-42s\" est affiche.",		\
+	"la string\"%0-1s\" est affiche.",			\
+	"la string\"%0-10000s\" est affiche.",		\
+											\
+	"la string\"%.s\" est affiche.",			\
+	"la string\"%.42s\" est affiche.",			\
+	"la string\"%.1s\" est affiche.",			\
+	"la string\"%.0s\" est affiche.",			\
+	"la string\"%.10000s\" est affiche.",		\
+											\
+	"la string\"%0.s\" est affiche.",			\
+	"la string\"%0.42s\" est affiche.",		\
+	"la string\"%0.1s\" est affiche.",			\
+	"la string\"%0.0s\" est affiche.",			\
+	"la string\"%0.10000s\" est affiche.",		\
+											\
+	"la string\"%-.s\" est affiche.",			\
+	"la string\"%-.42s\" est affiche.",		\
+	"la string\"%-.1s\" est affiche.",			\
+	"la string\"%-0.0s\" est affiche.",		\
+	"la string\"%-.10000s\" est affiche.",		\
+											\
+	"la string\"%42.42s\" est affiche.",		\
+	"la string\"%1.42s\" est affiche.",		\
+	"la string\"%42.1s\" est affiche.",		\
+	"la string\"%-42.42s\" est affiche.",		\
+	"la string\"%-1.42s\" est affiche.",		\
+	"la string\"%-42.1s\" est affiche.",		\
+	"la string\"%-0.0s\" est affiche.",		\
+	"la string\"%042.42s\" est affiche.",		\
+	"la string\"%01.42s\" est affiche.",		\
+	"la string\"%042.1s\" est affiche.",		\
+	"la string\"%-042.42s\" est affiche.",		\
+	"la string\"%-01.42s\" est affiche.",		\
+	"la string\"%-042.1s\" est affiche.",		\
+	"la string\"%0.0s\" est affiche.",			\
+	"la string\"%00.0s\" est affiche.",		\
+											\
+	"la string\"%-42.42.42s\" est affiche.",	\
+	"la string\"%42-s\" est affiche.",			\
+	"la string\"%--0020.000s\" est affiche.",	\
+	"la string\"%99999999999s\" est affiche.")
 
-TestSuite(one_str, .init = init_seed_and_stdout);
+TestSuite(one_str, .init = cr_redirect_stdout);
 
-Test(one_str, test00)
+TheoryDataPoints(one_str, simple) = {
+	FORMAT_DATAPOINTS,
+	STR_DATAPOINTS,
+};
+
+Theory((char *format, char *str), one_str, simple)
 {
-	char	*str;
-	char	*format = "la string str : %s ...";
-	char	*s = "maxi yolooooo ! :)";
+	FILE	*ft_printf_output;
+	FILE	*printf_output;
+	int		ret_printf;
+	int		ret_ft_printf;
 
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
+	printf_output = freopen("printf.output", "a+", stdout);
+	ret_printf = printf(format, str);
+	fclose(printf_output);
+
+	ft_printf_output = freopen("ft_printf.output", "a+", stdout);
+	ret_ft_printf = ft_printf(format, str);
+	fclose(ft_printf_output);
+
+	cr_expect_eq(ret_printf, ret_ft_printf,
+		"ft_printf(\"%s\", char *str = \"%s\") return a wrong value.", format, str);
+	cr_expect_file_contents_eq(printf_output, ft_printf_output,
+		"ft_printf(\"%s\", char *str = \"%s\") return a wrong output.", format, str);
+
+	remove("printf.output");
+	remove("ft_printf.output");
 }
 
-Test(one_str, test01)
-{
-	char	*str;
-	char	*format = "la string str : %14s ...";
-	char	*s = "maxi yolooooo ! :)";
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str, test02)
-{
-	char	*str;
-	char	*format = "la string str : %-23s ...";
-	char	*s = "maxi yolooooo ! :)";
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str, test03)
-{
-	char	*str;
-	char	*format = "la string str : %027s ...";
-	char	*s = "maxi yolooooo ! :)";
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str, test04)
-{
-	char	*str;
-	char	*format = "la string str : %052-s ...";
-	char	*s = "maxi yolooooo ! :)";
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str, test05)
-{
-	char	*str;
-	char	*format = "la string str : %05000s ...";
-	char	*s = "maxi yolooooo ! :)";
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str, test06)
-{
-	char	*str;
-	char	*format = "la string str : %05000.s ...";
-	char	*s = "maxi yolooooo ! :)";
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str, test07)
-{
-	char	*str;
-	char	*format = "la string str : %0-.s ...";
-	char	*s = "maxi yolooooo ! :)";
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str, test08)
-{
-	char	*str;
-	char	*format = "la string str : %.3s ...";
-	char	*s = "maxi yolooooo ! :)";
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str, test09)
-{
-	char	*str;
-	char	*format = "la string str : %.0s ...";
-	char	*s = "maxi yolooooo ! :)";
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str, test10)
-{
-	char	*str;
-	char	*format = "la string str : %.5000s ...";
-	char	*s = "maxi yolooooo ! :)";
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-TestSuite(one_str_one_asterisks, .init = init_seed_and_stdout);
-
-Test(one_str_one_asterisks, test00)
-{
-	char	*str;
-	char	*format = "le char %*s est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast = 42;
-
-	cr_expect_eq(asprintf(&str, format, ast, s), ft_printf(format, ast, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str_one_asterisks, test01)
-{
-	char	*str;
-	char	*format = "le char %*s est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast = -42;
-
-	cr_expect_eq(asprintf(&str, format, ast, s), ft_printf(format, ast, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str_one_asterisks, test02)
-{
-	char	*str;
-	char	*format = "le char %*s est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast = 0;
-
-	cr_expect_eq(asprintf(&str, format, ast, s), ft_printf(format, ast, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str_one_asterisks, test03)
-{
-	char	*str;
-	char	*format = "le char %.*s est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast = 42;
-
-	cr_expect_eq(asprintf(&str, format, ast, s), ft_printf(format, ast, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str_one_asterisks, test04)
-{
-	char	*str;
-	char	*format = "le char %.*s est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast = -42;
-
-	cr_expect_eq(asprintf(&str, format, ast, s), ft_printf(format, ast, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str_one_asterisks, test05)
-{
-	char	*str;
-	char	*format = "le char %.*s est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast = 0;
-
-	cr_expect_eq(asprintf(&str, format, ast, s), ft_printf(format, ast, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str_one_asterisks, test06)
-{
-	char	*str;
-	char	*format = "le char %-.*s est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast = 21;
-
-	cr_expect_eq(asprintf(&str, format, ast, s), ft_printf(format, ast, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str_one_asterisks, test07)
-{
-	char	*str;
-	char	*format = "le char %0*s est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast = 60;
-
-	cr_expect_eq(asprintf(&str, format, ast, s), ft_printf(format, ast, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str_one_asterisks, test08)
-{
-	char	*str;
-	char	*format = "le char %0-*c est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast = 0;
-
-	cr_expect_eq(asprintf(&str, format, ast, s), ft_printf(format, ast, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-TestSuite(one_str_two_asterisks, .init = init_seed_and_stdout);
-
-Test(one_str_two_asterisks, test00)
-{
-	char	*str;
-	char	*format = "le char %*.*s est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast1 = 10;
-	int		ast2 = 20;
-
-	cr_expect_eq(asprintf(&str, format, ast1, ast2, s), ft_printf(format, ast1, ast2, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str_two_asterisks, test01)
-{
-	char	*str;
-	char	*format = "le char %*.*s est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast1 = -10;
-	int		ast2 = -20;
-
-	cr_expect_eq(asprintf(&str, format, ast1, ast2, s), ft_printf(format, ast1, ast2, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str_two_asterisks, test02)
-{
-	char	*str;
-	char	*format = "le char %-*.*s est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast1 = -10;
-	int		ast2 = 20;
-
-	cr_expect_eq(asprintf(&str, format, ast1, ast2, s), ft_printf(format, ast1, ast2, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str_two_asterisks, test03)
-{
-	char	*str;
-	char	*format = "le char %0*.-*s est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast1 = 0;
-	int		ast2 = 0;
-
-	cr_expect_eq(asprintf(&str, format, ast1, ast2, s), ft_printf(format, ast1, ast2, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(one_str_two_asterisks, test04)
-{
-	char	*str;
-	char	*format = "le char %*-.*s est un arobase";
-	char	*s = "pour un max de yolo XD";
-	int		ast1 = -10;
-	int		ast2 = -20;
-
-	cr_expect_eq(asprintf(&str, format, ast1, ast2, s), ft_printf(format, ast1, ast2, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-	"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-TestSuite(two_str, .init = init_seed_and_stdout);
-
-Test(two_str, test00)
-{
-	char	*str;
-	char	*format = "le char %s est un arobase et le %s est random aussi.";
-	char	*s1 = "yolo";
-	char	*s2 = "swag";
-
-	cr_expect_eq(asprintf(&str, format, s1, s2), ft_printf(format, s1, s2),
-		"ft_printf(\"%s\", char s1 = \'%s\' char s2 = \'%s\') return a wrong value.", format, s1, s2);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", char s1 = \'%s\', char s2 = \'%s\') return a wrong output.", format, s1, s2);
-	free(str);
-}
-
-Test(two_str, test01)
-{
-	char	*str;
-	char	*format = "le char %14s est un arobase et le %.34s est random aussi.";
-	char	*s1 = "yolo";
-	char	*s2 = "swag";
-
-	cr_expect_eq(asprintf(&str, format, s1, s2), ft_printf(format, s1, s2),
-		"ft_printf(\"%s\", char s1 = \'%s\' char s2 = \'%s\') return a wrong value.", format, s1, s2);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", char s1 = \'%s\', char s2 = \'%s\') return a wrong output.", format, s1, s2);
-	free(str);
-}
-
-Test(two_str, test02)
-{
-	char	*str;
-	char	*format = "le char %032s est un arobase et le %7654-s est random aussi.";
-	char	*s1 = "yolo";
-	char	*s2 = "swag";
-
-	cr_expect_eq(asprintf(&str, format, s1, s2), ft_printf(format, s1, s2),
-		"ft_printf(\"%s\", char s1 = \'%s\' char s2 = \'%s\') return a wrong value.", format, s1, s2);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", char s1 = \'%s\', char s2 = \'%s\') return a wrong output.", format, s1, s2);
-	free(str);
-}
-
-Test(two_str, test03)
-{
-	char	*str;
-	char	*format = "le char %s est un arobase et le %s est random aussi.";
-	char	*s1 = "yolo";
-	char	*s2 = "swag";
-
-	cr_expect_eq(asprintf(&str, format, s1, s2), ft_printf(format, s1, s2),
-		"ft_printf(\"%s\", char s1 = \'%s\' char s2 = \'%s\') return a wrong value.", format, s1, s2);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", char s1 = \'%s\', char s2 = \'%s\') return a wrong output.", format, s1, s2);
-	free(str);
-}
-
-Test(two_str, test04)
-{
-	char	*str;
-	char	*format = "le char %-0.s est un arobase et le %-54s est random aussi.";
-	char	*s1 = "yolo";
-	char	*s2 = "swag";
-
-	cr_expect_eq(asprintf(&str, format, s1, s2), ft_printf(format, s1, s2),
-		"ft_printf(\"%s\", char s1 = \'%s\' char s2 = \'%s\') return a wrong value.", format, s1, s2);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", char s1 = \'%s\', char s2 = \'%s\') return a wrong output.", format, s1, s2);
-	free(str);
-}
-
-Test(two_str, test05)
-{
-	char	*str;
-	char	*format = "le char %*s est un arobase et le %*s est random aussi.";
-	char	*s1 = "yolo";
-	char	*s2 = "swag";
-
-	cr_expect_eq(asprintf(&str, format, -32, s1, -43, s2), ft_printf(format, -32, s1, -43, s2),
-		"ft_printf(\"%s\", char s1 = \'%s\' char s2 = \'%s\') return a wrong value.", format, s1, s2);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", char s1 = \'%s\', char s2 = \'%s\') return a wrong output.", format, s1, s2);
-	free(str);
-}
-
-Test(two_str, test06)
-{
-	char	*str;
-	char	*format = "le char %*.*s est un arobase et le %*.*s est random aussi.";
-	char	*s1 = "yolo";
-	char	*s2 = "swag";
-
-	cr_expect_eq(asprintf(&str, format, 32, 65, s1, 12, 32, s2), ft_printf(format, 32, 65, s1, 12, 32, s2),
-		"ft_printf(\"%s\", char s1 = \'%s\' char s2 = \'%s\') return a wrong value.", format, s1, s2);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", char s1 = \'%s\', char s2 = \'%s\') return a wrong output.", format, s1, s2);
-	free(str);
-}
-
-TestSuite(null_str, .init = init_seed_and_stdout);
-
-Test(null_str, test00)
-{
-	char	*str;
-	char	*format = "la string str : %s ...";
-	char	*s = NULL;
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(null_str, test01)
-{
-	char	*str;
-	char	*format = "la string str : %14s ...";
-	char	*s = NULL;
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(null_str, test02)
-{
-	char	*str;
-	char	*format = "la string str : %-23s ...";
-	char	*s = NULL;
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(null_str, test03)
-{
-	char	*str;
-	char	*format = "la string str : %027s ...";
-	char	*s = NULL;
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(null_str, test04)
-{
-	char	*str;
-	char	*format = "la string str : %052-s ...";
-	char	*s = NULL;
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(null_str, test05)
-{
-	char	*str;
-	char	*format = "la string str : %05000s ...";
-	char	*s = NULL;
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(null_str, test06)
-{
-	char	*str;
-	char	*format = "la string str : %05000.s ...";
-	char	*s = NULL;
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(null_str, test07)
-{
-	char	*str;
-	char	*format = "la string str : %0-.s ...";
-	char	*s = NULL;
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(null_str, test08)
-{
-	char	*str;
-	char	*format = "la string str : %.3s ...";
-	char	*s = NULL;
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(null_str, test09)
-{
-	char	*str;
-	char	*format = "la string str : %.0s ...";
-	char	*s = NULL;
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
-
-Test(null_str, test10)
-{
-	char	*str;
-	char	*format = "la string str : %.5000s ...";
-	char	*s = NULL;
-
-	cr_expect_eq(asprintf(&str, format, s), ft_printf(format, s),
-		"ft_printf(\"%s\", str = \'%s\') return a wrong value.", format, s);
-	fflush(stdout);
-	cr_expect_stdout_eq_str(str,
-		"ft_printf(\"%s\", str = \'%s\') return a wrong output.", format, s);
-	free(str);
-}
+/*
+	char	*format = "le nombre %*d est affiche.";
+	char	*format = "le nombre %.*d est affiche.";
+	char	*format = "le nombre %-*d est affiche.";
+	char	*format = "le nombre %0*d est affiche.";
+	char	*format = "le nombre %-0*d est affiche.";
+	char	*format = "le nombre %0.*d est affiche.";
+	char	*format = "le nombre %-0.*d est affiche.";
+	char	*format = "le nombre %-.*d est affiche.";
+*/
