@@ -10,16 +10,20 @@
 #                                                                              #
 # **************************************************************************** #
 
-FT_PRINTF_DIR		=		../rendu/ft_printf00/
+FT_PRINTF_DIR		=		../ft_printf/
+FT_PRINTF_INC_DIR		=	../ft_printf/include
 
-_SRCS				=		test_percent_s.c test_percent_c.c test_percent_d.c
+_SRCS				=		test_percent_s.c	\
+							test_percent_c.c	\
+							test_percent_d.c	\
+							test_percent_i.c
 SRCS_DIR			=		./srcs/
 SRCS				=		$(addprefix ${SRCS_DIR}, ${_SRCS})
 OBJS				=		${SRCS:.c=.o}
 NAME				=		ft_printf_unit_tests
 
 INC_CRITERION		=		-lcriterion
-INC_FT_PRINTF		=		-L${FT_PRINTF_DIR} -lftprintf
+INC_FT_PRINTF		=		-I${FT_PRINTF_INC_DIR} -L${FT_PRINTF_DIR} -lftprintf
 INC_DIR				=       ./include/
 INC					=		-I${INC_DIR}
 
@@ -32,15 +36,15 @@ RM					=		rm -f
 all					:		${NAME}
 
 ${NAME}				:		${OBJS} | build
-	${CC} ${CFLAGS} ${INC_FT_PRINTF} ${INC_CRITERION} $^ -o $@
+	${CC} ${CFLAGS} $^ ${INC_FT_PRINTF} ${INC_CRITERION} -o $@
 
 %.o					:		%.c
-	${CC} ${CFLAGS} ${INC} -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -D_GNU_SOURCE ${INC} -I${FT_PRINTF_INC_DIR} -c $< -o ${<:.c=.o}
 
 build				:
 	@${MAKE} -C ${FT_PRINTF_DIR}
 
-test				:	re
+test				:	all
 	./${NAME}
 
 details				: ${NAME} build
