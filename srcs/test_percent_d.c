@@ -6,14 +6,20 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 09:52:05 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/23 01:10:33 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/06 19:08:27 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test_ft_printf.h"
 #define INT_DATAPOINTS DataPoints(int,		\
-	0, 1, 42, 2147483647,					\
-	-1, -42, -2147483648)
+	0,										\
+	1,										\
+	42,										\
+	MAX_INT,								\
+	-1,										\
+	-42,									\
+	MIN_INT									\
+	)
 #define FORMAT_DATAPOINTS DataPoints(char*,	\
 	"le nombre %d est affiche.",			\
 											\
@@ -73,12 +79,13 @@
 	"le nombre %-01.42d est affiche.",		\
 	"le nombre %-042.1d est affiche.",		\
 	"le nombre %0.0d est affiche.",			\
-	"le nombre %00.0d est affiche.",		\
+	"le nombre %00.0d est affiche."/*,		\
 											\
 	"le nombre %-42.42.42d est affiche.",	\
 	"le nombre %42-d est affiche.",			\
 	"le nombre %--0020.000d est affiche.",	\
-	"le nombre %99999999999d est affiche.")
+	"le nombre %99999999999d est affiche."	\
+*/	)
 
 TheoryDataPoints(one_digit, simple) = {
 	FORMAT_DATAPOINTS,

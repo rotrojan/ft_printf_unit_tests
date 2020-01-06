@@ -6,12 +6,12 @@
 #    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 07:02:44 by rotrojan          #+#    #+#              #
-#    Updated: 2019/12/22 16:05:22 by rotrojan         ###   ########.fr        #
+#    Updated: 2020/01/06 21:15:29 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FT_PRINTF_DIR		=		../ft_printf/
-FT_PRINTF_INC_DIR		=	../ft_printf/include
+FT_PRINTF_DIR		=		../rendu/ft_printf00/
+PRINTF_HEADER_DIR	=		$(dir $(shell find ${FT_PRINTF_DIR} -name "*.h"))
 
 _SRCS				=		test_percent_s.c	\
 							test_percent_c.c	\
@@ -23,7 +23,7 @@ OBJS				=		${SRCS:.c=.o}
 NAME				=		ft_printf_unit_tests
 
 INC_CRITERION		=		-lcriterion
-INC_FT_PRINTF		=		-I${FT_PRINTF_INC_DIR} -L${FT_PRINTF_DIR} -lftprintf
+INC_FT_PRINTF		=		-L${FT_PRINTF_DIR} -lftprintf
 INC_DIR				=       ./include/
 INC					=		-I${INC_DIR}
 
@@ -38,8 +38,8 @@ all					:		${NAME}
 ${NAME}				:		${OBJS} | build
 	${CC} ${CFLAGS} $^ ${INC_FT_PRINTF} ${INC_CRITERION} -o $@
 
-%.o					:		%.c
-	${CC} ${CFLAGS} -D_GNU_SOURCE ${INC} -I${FT_PRINTF_INC_DIR} -c $< -o ${<:.c=.o}
+%.o					:		%.c ${INC_DIR}/test_ft_printf.h
+	${CC} ${CFLAGS} -D_GNU_SOURCE ${INC} $(addprefix -I, ${PRINTF_HEADER_DIR}) -c $< -o ${<:.c=.o}
 
 build				:
 	@${MAKE} -C ${FT_PRINTF_DIR}

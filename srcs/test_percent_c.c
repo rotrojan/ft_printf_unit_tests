@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 04:21:09 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/16 11:46:36 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/06 19:04:59 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,70 +43,71 @@
 	246, 247, 248, 249, 250, 251, 252, 253,	\
 	254, 255)
 #define FORMAT_DATAPOINTS DataPoints(char*,	\
-	"le char %c est affiche.",			\
+	"le char %c est affiche.",				\
 											\
 	"le char %42c est affiche.",			\
-	"le char %1c est affiche.",			\
-	"le char %10000c est affiche.",		\
+	"le char %1c est affiche.",				\
+	"le char %10000c est affiche.",			\
 											\
-	"le char %0c est affiche.",			\
+	"le char %0c est affiche.",				\
 	"le char %042c est affiche.",			\
 	"le char %01c est affiche.",			\
 	"le char %010000c est affiche.",		\
 											\
-	"le char %-c est affiche.",			\
+	"le char %-c est affiche.",				\
 	"le char %-42c est affiche.",			\
 	"le char %-1c est affiche.",			\
 	"le char %-10000c est affiche.",		\
 											\
 	"le char %-0c est affiche.",			\
-	"le char %-042c est affiche.",		\
+	"le char %-042c est affiche.",			\
 	"le char %-01c est affiche.",			\
 	"le char %-010000c est affiche.",		\
 											\
 	"le char %0-c est affiche.",			\
-	"le char %0-42c est affiche.",		\
+	"le char %0-42c est affiche.",			\
 	"le char %0-1c est affiche.",			\
 	"le char %0-10000c est affiche.",		\
 											\
-	"le char %.c est affiche.",			\
+	"le char %.c est affiche.",				\
 	"le char %.42c est affiche.",			\
 	"le char %.1c est affiche.",			\
 	"le char %.0c est affiche.",			\
 	"le char %.10000c est affiche.",		\
 											\
 	"le char %0.c est affiche.",			\
-	"le char %0.42c est affiche.",		\
+	"le char %0.42c est affiche.",			\
 	"le char %0.1c est affiche.",			\
 	"le char %0.0c est affiche.",			\
 	"le char %0.10000c est affiche.",		\
 											\
 	"le char %-.c est affiche.",			\
-	"le char %-.42c est affiche.",		\
+	"le char %-.42c est affiche.",			\
 	"le char %-.1c est affiche.",			\
-	"le char %-0.0c est affiche.",		\
+	"le char %-0.0c est affiche.",			\
 	"le char %-.10000c est affiche.",		\
 											\
-	"le char %42.42c est affiche.",		\
-	"le char %1.42c est affiche.",		\
-	"le char %42.1c est affiche.",		\
+	"le char %42.42c est affiche.",			\
+	"le char %1.42c est affiche.",			\
+	"le char %42.1c est affiche.",			\
 	"le char %-42.42c est affiche.",		\
-	"le char %-1.42c est affiche.",		\
-	"le char %-42.1c est affiche.",		\
-	"le char %-0.0c est affiche.",		\
+	"le char %-1.42c est affiche.",			\
+	"le char %-42.1c est affiche.",			\
+	"le char %-0.0c est affiche.",			\
 	"le char %042.42c est affiche.",		\
-	"le char %01.42c est affiche.",		\
-	"le char %042.1c est affiche.",		\
+	"le char %01.42c est affiche.",			\
+	"le char %042.1c est affiche.",			\
 	"le char %-042.42c est affiche.",		\
 	"le char %-01.42c est affiche.",		\
 	"le char %-042.1c est affiche.",		\
 	"le char %0.0c est affiche.",			\
-	"le char %00.0c est affiche.",		\
+	"le char %00.0c est affiche."/*,			\
 											\
-	"le char %-42.42.42c est affiche.",	\
+	"le char %-42.42.42c est affiche.",		\
 	"le char %42-c est affiche.",			\
 	"le char %--0020.000c est affiche.",	\
-	"le char %99999999999c est affiche.")
+	"le char %99999999999c est affiche."	\
+*/	)
 
 TestSuite(one_char, .init = cr_redirect_stdout);
 

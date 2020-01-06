@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 11:44:51 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/20 09:24:31 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/06 19:16:41 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,7 @@
 # define MAX_CHAR 127
 # define MIN_INT -2147483648
 # define MAX_INT 2147483647
-# define RAND_INT (rand() % (MAX_INT - MIN_INT + 1)) + MIN_INT
-# define RAND_POS_INT (rand() % (MAX_INT - 1 + 1)) + 1
-# define RAND_NEG_INT (rand() % (-1 - MIN_INT + 1)) + MIN_INT
-# define RAND_CHAR (rand() % (MAX_CHAR - MIN_CHAR + 1)) + MIN_CHAR
 # define GIANT_BUFF	6384
 # define FMT_BUFF	512
-
-void	init_seed_and_stdout(void);
 
 #endif

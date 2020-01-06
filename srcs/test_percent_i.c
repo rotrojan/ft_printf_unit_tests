@@ -6,14 +6,20 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 09:52:05 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/23 01:10:33 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/06 19:16:39 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test_ft_printf.h"
 #define INT_DATAPOINTS DataPoints(int,		\
-	0, 1, 42, 2147483647,					\
-	-1, -42, -2147483648)
+	0,										\
+	1,										\
+	42,										\
+	2147483647,								\
+	-1,										\
+	-42,									\
+	-2147483648								\
+	)
 #define FORMAT_DATAPOINTS DataPoints(char*,	\
 	"le nombre %i est affiche.",			\
 											\
@@ -73,12 +79,13 @@
 	"le nombre %-01.42i est affiche.",		\
 	"le nombre %-042.1i est affiche.",		\
 	"le nombre %0.0i est affiche.",			\
-	"le nombre %00.0i est affiche.",		\
+	"le nombre %00.0i est affiche."/*,		\
 											\
 	"le nombre %-42.42.42i est affiche.",	\
 	"le nombre %42-i est affiche.",			\
 	"le nombre %--0020.000i est affiche.",	\
-	"le nombre %99999999999i est affiche.")
+	"le nombre %99999999999i est affiche."	\
+*/	)
 
 TestSuite(one_int, .init = cr_redirect_stdout);
 
@@ -122,4 +129,4 @@ Theory((char *format, int d), one_int, simple)
 	char	*format = "le nombre %-.*d est affiche.";
 
 	char	*format = "le nombre %*.*d est affiche.";
-/
+*/

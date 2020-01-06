@@ -6,67 +6,68 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 10:33:19 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/18 00:25:52 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/06 19:05:20 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test_ft_printf.h"
-#define STR_DATAPOINTS DataPoints(char*,	\
-	"chaine non vide et non nulle",			\
-	"",										\
-	NULL)
-#define FORMAT_DATAPOINTS DataPoints(char*,	\
-	"la string\"%s\" est affiche.",			\
-											\
+#define STR_DATAPOINTS DataPoints(char*,		\
+	"chaine non vide et non nulle",				\
+	"",											\
+	NULL										\
+	)
+#define FORMAT_DATAPOINTS DataPoints(char*,		\
+	"la string\"%s\" est affiche.",				\
+												\
 	"la string\"%42s\" est affiche.",			\
 	"la string\"%1s\" est affiche.",			\
 	"la string\"%10000s\" est affiche.",		\
-											\
+												\
 	"la string\"%0s\" est affiche.",			\
 	"la string\"%042s\" est affiche.",			\
 	"la string\"%01s\" est affiche.",			\
 	"la string\"%010000s\" est affiche.",		\
-											\
+												\
 	"la string\"%-s\" est affiche.",			\
 	"la string\"%-42s\" est affiche.",			\
 	"la string\"%-1s\" est affiche.",			\
 	"la string\"%-10000s\" est affiche.",		\
-											\
+												\
 	"la string\"%-0s\" est affiche.",			\
-	"la string\"%-042s\" est affiche.",		\
+	"la string\"%-042s\" est affiche.",			\
 	"la string\"%-01s\" est affiche.",			\
 	"la string\"%-010000s\" est affiche.",		\
-											\
+												\
 	"la string\"%0-s\" est affiche.",			\
-	"la string\"%0-42s\" est affiche.",		\
+	"la string\"%0-42s\" est affiche.",			\
 	"la string\"%0-1s\" est affiche.",			\
 	"la string\"%0-10000s\" est affiche.",		\
-											\
+												\
 	"la string\"%.s\" est affiche.",			\
 	"la string\"%.42s\" est affiche.",			\
 	"la string\"%.1s\" est affiche.",			\
 	"la string\"%.0s\" est affiche.",			\
 	"la string\"%.10000s\" est affiche.",		\
-											\
+												\
 	"la string\"%0.s\" est affiche.",			\
-	"la string\"%0.42s\" est affiche.",		\
+	"la string\"%0.42s\" est affiche.",			\
 	"la string\"%0.1s\" est affiche.",			\
 	"la string\"%0.0s\" est affiche.",			\
 	"la string\"%0.10000s\" est affiche.",		\
-											\
+												\
 	"la string\"%-.s\" est affiche.",			\
-	"la string\"%-.42s\" est affiche.",		\
+	"la string\"%-.42s\" est affiche.",			\
 	"la string\"%-.1s\" est affiche.",			\
-	"la string\"%-0.0s\" est affiche.",		\
+	"la string\"%-0.0s\" est affiche.",			\
 	"la string\"%-.10000s\" est affiche.",		\
-											\
+												\
 	"la string\"%42.42s\" est affiche.",		\
-	"la string\"%1.42s\" est affiche.",		\
-	"la string\"%42.1s\" est affiche.",		\
+	"la string\"%1.42s\" est affiche.",			\
+	"la string\"%42.1s\" est affiche.",			\
 	"la string\"%-42.42s\" est affiche.",		\
 	"la string\"%-1.42s\" est affiche.",		\
 	"la string\"%-42.1s\" est affiche.",		\
-	"la string\"%-0.0s\" est affiche.",		\
+	"la string\"%-0.0s\" est affiche.",			\
 	"la string\"%042.42s\" est affiche.",		\
 	"la string\"%01.42s\" est affiche.",		\
 	"la string\"%042.1s\" est affiche.",		\
@@ -74,12 +75,13 @@
 	"la string\"%-01.42s\" est affiche.",		\
 	"la string\"%-042.1s\" est affiche.",		\
 	"la string\"%0.0s\" est affiche.",			\
-	"la string\"%00.0s\" est affiche.",		\
-											\
+	"la string\"%00.0s\" est affiche."/*,			\
+												\
 	"la string\"%-42.42.42s\" est affiche.",	\
 	"la string\"%42-s\" est affiche.",			\
-	"la string\"%--0020.000s\" est affiche.",	\
-	"la string\"%99999999999s\" est affiche.")
+	"la string\"%--0020.000s\" est affiche]",	\
+	"la string\"%99999999999s\" est affiche."	\
+*/	)
 
 TestSuite(one_str, .init = cr_redirect_stdout);
 
