@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 09:52:05 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/06 19:08:27 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/06 23:18:19 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 	0,										\
 	1,										\
 	42,										\
-	MAX_INT,								\
+	2147483647,								\
 	-1,										\
 	-42,									\
-	MIN_INT									\
+	-2147483648								\
 	)
 #define FORMAT_DATAPOINTS DataPoints(char*,	\
 	"le nombre %d est affiche.",			\

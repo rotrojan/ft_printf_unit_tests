@@ -6,13 +6,14 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 11:44:51 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/06 19:16:41 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/09 02:08:30 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEST_FT_PRINTF_H
 # define TEST_FT_PRINTF_H
 # include <criterion/criterion.h>
+# include <criterion/parameterized.h>
 # include <criterion/redirect.h>
 # include <criterion/theories.h>
 # include <string.h>
