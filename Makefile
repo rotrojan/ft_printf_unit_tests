@@ -6,11 +6,11 @@
 #    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 07:02:44 by rotrojan          #+#    #+#              #
-#    Updated: 2020/01/09 02:30:09 by rotrojan         ###   ########.fr        #
+#    Updated: 2020/01/13 17:53:29 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FT_PRINTF_DIR		=		../rendu/ft_printf00/
+FT_PRINTF_DIR		=		../ft_printf/
 PRINTF_HEADER_DIR	=		$(dir $(shell find ${FT_PRINTF_DIR} -name "*.h"))
 
 _SRCS				=		test_percent_s.c		\
@@ -32,7 +32,7 @@ INC_FT_PRINTF		=		-L${FT_PRINTF_DIR} -lftprintf
 INC_DIR				=       ./include/
 INC					=		-I${INC_DIR}
 
-CFLAGS				=		-Wall -Wextra
+CFLAGS				=		-Wall -Wextra -Werror -Wno-format-security
 
 CC					=		clang
 NORMINETTE			=		norminette

@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 09:52:05 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/06 23:18:19 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/12 04:57:22 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 #define INT_DATAPOINTS DataPoints(int,		\
 	0,										\
 	1,										\
+	2,										\
 	42,										\
 	2147483647,								\
 	-1,										\
+	-2,										\
 	-42,									\
 	-2147483648								\
 	)
@@ -30,60 +32,81 @@
 	"le nombre %0d est affiche.",			\
 	"le nombre %042d est affiche.",			\
 	"le nombre %01d est affiche.",			\
+	"le nombre %02d est affiche.",			\
 	"le nombre %010000d est affiche.",		\
 											\
 	"le nombre %-d est affiche.",			\
 	"le nombre %-42d est affiche.",			\
 	"le nombre %-1d est affiche.",			\
+	"le nombre %-2d est affiche.",			\
 	"le nombre %-10000d est affiche.",		\
 											\
 	"le nombre %-0d est affiche.",			\
 	"le nombre %-042d est affiche.",		\
 	"le nombre %-01d est affiche.",			\
+	"le nombre %-02d est affiche.",			\
 	"le nombre %-010000d est affiche.",		\
 											\
 	"le nombre %0-d est affiche.",			\
 	"le nombre %0-42d est affiche.",		\
 	"le nombre %0-1d est affiche.",			\
+	"le nombre %0-2d est affiche.",			\
 	"le nombre %0-10000d est affiche.",		\
 											\
 	"le nombre %.d est affiche.",			\
 	"le nombre %.42d est affiche.",			\
 	"le nombre %.1d est affiche.",			\
+	"le nombre %.2d est affiche.",			\
 	"le nombre %.0d est affiche.",			\
 	"le nombre %.10000d est affiche.",		\
 											\
 	"le nombre %0.d est affiche.",			\
 	"le nombre %0.42d est affiche.",		\
 	"le nombre %0.1d est affiche.",			\
+	"le nombre %0.2d est affiche.",			\
 	"le nombre %0.0d est affiche.",			\
 	"le nombre %0.10000d est affiche.",		\
 											\
 	"le nombre %-.d est affiche.",			\
 	"le nombre %-.42d est affiche.",		\
 	"le nombre %-.1d est affiche.",			\
+	"le nombre %-.2d est affiche.",			\
 	"le nombre %-0.0d est affiche.",		\
 	"le nombre %-.10000d est affiche.",		\
 											\
 	"le nombre %42.42d est affiche.",		\
 	"le nombre %1.42d est affiche.",		\
+	"le nombre %2.42d est affiche.",		\
 	"le nombre %42.1d est affiche.",		\
+	"le nombre %42.2d est affiche.",		\
 	"le nombre %-42.42d est affiche.",		\
 	"le nombre %-1.42d est affiche.",		\
+	"le nombre %-2.42d est affiche.",		\
 	"le nombre %-42.1d est affiche.",		\
+	"le nombre %-42.2d est affiche.",		\
+	"le nombre %-1.2d est affiche.",		\
+	"le nombre %-2.1d est affiche.",		\
 	"le nombre %-0.0d est affiche.",		\
 	"le nombre %042.42d est affiche.",		\
 	"le nombre %01.42d est affiche.",		\
+	"le nombre %02.42d est affiche.",		\
 	"le nombre %042.1d est affiche.",		\
+	"le nombre %042.2d est affiche.",		\
+	"le nombre %01.2d est affiche.",		\
+	"le nombre %02.1d est affiche.",		\
 	"le nombre %-042.42d est affiche.",		\
 	"le nombre %-01.42d est affiche.",		\
+	"le nombre %-02.42d est affiche.",		\
 	"le nombre %-042.1d est affiche.",		\
+	"le nombre %-042.2d est affiche.",		\
+	"le nombre %-01.2d est affiche.",		\
+	"le nombre %-02.1d est affiche.",		\
 	"le nombre %0.0d est affiche.",			\
-	"le nombre %00.0d est affiche."/*,		\
+	"le nombre %00.0d est affiche.",		\
 											\
 	"le nombre %-42.42.42d est affiche.",	\
 	"le nombre %42-d est affiche.",			\
-	"le nombre %--0020.000d est affiche.",	\
+	"le nombre %--0020.000d est affiche."/*,	\
 	"le nombre %99999999999d est affiche."	\
 */	)
 

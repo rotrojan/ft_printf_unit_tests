@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 20:26:31 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/09 00:54:53 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/12 04:56:10 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,70 +17,91 @@
 	NULL											\
 	)
 #define FORMAT_DATAPOINTS DataPoints(char*,	\
-	"le nombre %p est affiche.",			\
+	"l'adresse %p est affiche.",			\
 											\
-	"le nombre %42p est affiche.",			\
+	"l'adresse %42p est affiche.",			\
 	"l'adresse %1p est affiche.",			\
 	"l'adresse %10000p est affiche.",		\
 											\
 	"l'adresse %0p est affiche.",			\
 	"l'adresse %042p est affiche.",			\
 	"l'adresse %01p est affiche.",			\
+	"l'adresse %02p est affiche.",			\
 	"l'adresse %010000p est affiche.",		\
 											\
 	"l'adresse %-p est affiche.",			\
 	"l'adresse %-42p est affiche.",			\
 	"l'adresse %-1p est affiche.",			\
+	"l'adresse %-2p est affiche.",			\
 	"l'adresse %-10000p est affiche.",		\
 											\
 	"l'adresse %-0p est affiche.",			\
 	"l'adresse %-042p est affiche.",		\
 	"l'adresse %-01p est affiche.",			\
+	"l'adresse %-02p est affiche.",			\
 	"l'adresse %-010000p est affiche.",		\
 											\
 	"l'adresse %0-p est affiche.",			\
 	"l'adresse %0-42p est affiche.",		\
 	"l'adresse %0-1p est affiche.",			\
+	"l'adresse %0-2p est affiche.",			\
 	"l'adresse %0-10000p est affiche.",		\
 											\
 	"l'adresse %.p est affiche.",			\
 	"l'adresse %.42p est affiche.",			\
 	"l'adresse %.1p est affiche.",			\
+	"l'adresse %.2p est affiche.",			\
 	"l'adresse %.0p est affiche.",			\
 	"l'adresse %.10000p est affiche.",		\
 											\
 	"l'adresse %0.p est affiche.",			\
 	"l'adresse %0.42p est affiche.",		\
 	"l'adresse %0.1p est affiche.",			\
+	"l'adresse %0.2p est affiche.",			\
 	"l'adresse %0.0p est affiche.",			\
 	"l'adresse %0.10000p est affiche.",		\
 											\
 	"l'adresse %-.p est affiche.",			\
 	"l'adresse %-.42p est affiche.",		\
 	"l'adresse %-.1p est affiche.",			\
+	"l'adresse %-.2p est affiche.",			\
 	"l'adresse %-0.0p est affiche.",		\
 	"l'adresse %-.10000p est affiche.",		\
 											\
 	"l'adresse %42.42p est affiche.",		\
 	"l'adresse %1.42p est affiche.",		\
+	"l'adresse %2.42p est affiche.",		\
 	"l'adresse %42.1p est affiche.",		\
+	"l'adresse %42.2p est affiche.",		\
 	"l'adresse %-42.42p est affiche.",		\
 	"l'adresse %-1.42p est affiche.",		\
+	"l'adresse %-2.42p est affiche.",		\
 	"l'adresse %-42.1p est affiche.",		\
+	"l'adresse %-42.2p est affiche.",		\
+	"l'adresse %-1.2p est affiche.",		\
+	"l'adresse %-2.1p est affiche.",		\
 	"l'adresse %-0.0p est affiche.",		\
 	"l'adresse %042.42p est affiche.",		\
 	"l'adresse %01.42p est affiche.",		\
+	"l'adresse %02.42p est affiche.",		\
 	"l'adresse %042.1p est affiche.",		\
+	"l'adresse %042.2p est affiche.",		\
+	"l'adresse %01.2p est affiche.",		\
+	"l'adresse %02.1p est affiche.",		\
 	"l'adresse %-042.42p est affiche.",		\
 	"l'adresse %-01.42p est affiche.",		\
+	"l'adresse %-02.42p est affiche.",		\
 	"l'adresse %-042.1p est affiche.",		\
+	"l'adresse %-042.2p est affiche.",		\
+	"l'adresse %-01.2p est affiche.",		\
+	"l'adresse %-02.1p est affiche.",		\
 	"l'adresse %0.0p est affiche.",			\
-	"l'adresse %00.0p est affiche."/*,		\
+	"l'adresse %00.0p est affiche.",		\
 											\
-	"l'adresse %-42.42.42p est affiche.",	\
-	"l'adresse %42-p est affiche.",			\
-	"l'adresse %--0020.000p est affiche.",	\
-	"l'adresse %99999999999p est affiche."	\
+	"le nombre %-42.42.42p est affiche.",	\
+	"le nombre %42-p est affiche.",			\
+	"le nombre %--0020.000p est affiche.",/*	\
+	"le nombre %99999999999p est affiche."	\
 */	)
 
 TestSuite(one_ptr, .init = cr_redirect_stdout);
